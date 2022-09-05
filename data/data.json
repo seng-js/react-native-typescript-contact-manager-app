@@ -1,0 +1,130 @@
+[
+  {
+    "avatar":"img/img1.jpg",
+    "city":"Ukraine, Kyiv",
+    "company":"Logical",
+    "id":1,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Jonathan Thomas",
+    "position":"Web Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img2.jpg",
+    "city":"Ukraine, Kharkiv",
+    "company":"Logical",
+    "id":2,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Elizabeth Marks",
+    "position":"UI Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img3.jpg",
+    "city":"Ukraine, Odessa",
+    "company":"HandyCode",
+    "id":3,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Carlos Moreno",
+    "position":"UI Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img4.jpg",
+    "city":"Ukraine, Dnipro",
+    "company":"PerfectCode",
+    "id":4,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Charles Tapia",
+    "position":"Web Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img5.jpg",
+    "city":"Ukraine, Lviv",
+    "company":"PerfectCode",
+    "id":5,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Jennifer Warner",
+    "position":"UI Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img6.jpg",
+    "city":"Ukraine, Lviv",
+    "company":"Logical",
+    "id":6,
+    "isContact":false,
+    "isFavorite":false,
+    "name":"Andrew Neil",
+    "position":"Web Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img7.jpg",
+    "city":"Ukraine, Lviv",
+    "company":"Logical",
+    "id":7,
+    "isContact":true,
+    "isFavorite":true,
+    "name":"Amanda Jacobs",
+    "position":"UI Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  },
+  {
+    "avatar":"img/img8.jpg",
+    "city":"Ukraine, Lviv",
+    "company":"HandyCode",
+    "id":8,
+    "isContact":false,
+    "isFavorite":true,
+    "name":"Amber Estes",
+    "position":"UI Designer",
+    "social_networks":{
+      "facebook":"",
+      "instagram":"",
+      "twitter":"",
+      "youtube":""
+    }
+  }
+]
