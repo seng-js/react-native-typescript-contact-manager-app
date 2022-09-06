@@ -1,4 +1,4 @@
-import {Image, Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {grey, iconFontMedium} from "../utils/Styles";
@@ -16,11 +16,11 @@ import {
 } from "../utils/Constants";
 import {saveContactHandler} from "../redux";
 import {useDispatch} from "react-redux";
-import Select from "../components/Form/Select";
 import {buildNotificationMessage, deleteKeys} from "../utils";
 import {Button} from "react-native-paper";
 import {sendPushNotification} from "../utils/Notifications";
 import {useGetEnableOptions} from "../hooks/useGetEnableOptions";
+import SelectDropdown from 'react-native-select-dropdown';
 
 interface FormScreenProps {
     route:any,
@@ -71,7 +71,7 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
         setInputs((prevState: any) => ({...prevState, [input]: text}));
     };
 
-    const handleSocialOnChange = (text: any, input: string): void => {
+    const handleSocialOnChange = (text: any, input: string): any => {
         setInputs({
             ...inputs,
             social_networks: {
@@ -103,10 +103,24 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
         <SafeAreaView style={{flex: 1}}>
             <ScrollView style={{padding: 10}}>
                 <View style={styles.selectContainer}>
-                    <Select
-                        name="Avatar"
-                        errors={errors.avatar}
+                    <SelectDropdown
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            return item
+                        }}
                         data={listAvatar}
+                        buttonStyle={styles.dropdownButtonStyle}
+                        dropdownStyle={styles.dropdownDropdownStyle}
+                        rowStyle={styles.dropdownRowStyle}
+                        selectedRowStyle={styles.dropdownSelectedRowStyle}
+                        searchInputStyle={styles.dropdownSearchInputStyleStyle}
+                        searchPlaceHolder={'Search here'}
+                        searchPlaceHolderColor={'#F8F8F8'}
+                        renderSearchInputLeftIcon={() => {
+                            return <Ionicons name={'search'} color={Colors.darkerBlue} size={iconFontMedium} />;
+                        }}
                         defaultValueByIndex={inputs?.selectedIndexProfile}
                         onSelect={(selectedItem:any) => handleOnSelect(selectedItem, 'avatar')}
                         renderCustomizedButtonChild={(selectedItem:any) => {
@@ -133,6 +147,11 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                             );
                         }}
                     />
+                    {errors && errors.avatar && (
+                        <Text style={styles.errorMessage}>
+                            {errors.avatar}
+                        </Text>
+                    )}
                     <Input
                         onChangeText={(text: any) => handleOnchange(text, 'name')}
                         onFocus={() => handleError(null, 'name')}
@@ -143,7 +162,7 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                         error={errors.name}
                     />
                     <Input
-                        onChange={(event: any) => handleOnchange(event.target.value(), 'company')}
+                        onChangeText={(event: any) => handleOnchange(event.target.value(), 'company')}
                         onFocus={() => handleError(null, 'company')}
                         iconName="office-building-outline"
                         label="Company"
@@ -151,11 +170,25 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                         value={inputs?.company}
                         error={errors.company}
                     />
-                    <Select
-                        name="Position"
-                        errors={errors.position}
+                    <SelectDropdown
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            return item
+                        }}
+                        buttonStyle={styles.dropdownButtonStyle}
+                        dropdownStyle={styles.dropdownDropdownStyle}
+                        rowStyle={styles.dropdownRowStyle}
+                        selectedRowStyle={styles.dropdownSelectedRowStyle}
+                        searchInputStyle={styles.dropdownSearchInputStyleStyle}
+                        searchPlaceHolder={'Search here'}
+                        searchPlaceHolderColor={'#F8F8F8'}
+                        renderSearchInputLeftIcon={() => {
+                            return <Ionicons name={'search'} color={Colors.darkerBlue} size={iconFontMedium} />;
+                        }}
                         data={listPosition}
-                        defaultValueByIndex={inputs?.selectedIndexPosition}
+                        defaultValue={() => {}}
                         onSelect={(selectedItem: { image: string; title: any; }) => handleOnSelect(selectedItem, 'position')}
                         renderCustomizedButtonChild={(selectedItem: any) => {
                             return (
@@ -181,9 +214,28 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                         }}
                         search
                     />
-                    <Select
-                        name="City"
-                        errors={errors.city}
+                    {errors && errors.position && (
+                        <Text style={styles.errorMessage}>
+                            {errors.position}
+                        </Text>
+                    )}
+                    <SelectDropdown
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            return selectedItem
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            return item
+                        }}
+                        buttonStyle={styles.dropdownButtonStyle}
+                        dropdownStyle={styles.dropdownDropdownStyle}
+                        rowStyle={styles.dropdownRowStyle}
+                        selectedRowStyle={styles.dropdownSelectedRowStyle}
+                        searchInputStyle={styles.dropdownSearchInputStyleStyle}
+                        searchPlaceHolder={'Search here'}
+                        searchPlaceHolderColor={'#F8F8F8'}
+                        renderSearchInputLeftIcon={() => {
+                            return <Ionicons name={'search'} color={Colors.darkerBlue} size={iconFontMedium} />;
+                        }}
                         data={listCity}
                         defaultValueByIndex={inputs?.selectedIndexCity}
                         onSelect={(selectedItem: any) => handleOnSelect(selectedItem, 'city')}
@@ -212,6 +264,11 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                         }}
                         search
                     />
+                    {errors && errors.city && (
+                        <Text style={styles.errorMessage}>
+                            {errors.city}
+                        </Text>
+                    )}
                     <Input
                         onChangeText={(text:string) => handleSocialOnChange(text, 'facebook')}
                         onFocus={() => handleError(null, 'facebook')}
@@ -237,6 +294,7 @@ const FormScreen = ({route, navigation}: FormScreenProps) => {
                         value={inputs?.social_networks?.twitter}
                         error={errors.twitter}
                     />
+
                     <Input
                         onChangeText={(text:string) => handleSocialOnChange(text, 'youtube')}
                         onFocus={() => handleError(null, 'youtube')}
@@ -314,5 +372,64 @@ const styles = StyleSheet.create({
     },
     selectIcon: {
         marginLeft: -10
+    },
+    dropdownButtonStyle: {
+        width: '100%',
+        height: 45,
+        paddingHorizontal: 0,
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: grey,
+    },
+    dropdownDropdownStyle: {
+        backgroundColor: 'slategray'
+    },
+    dropdownRowStyle: {
+        backgroundColor: 'slategray',
+        borderBottomColor: '#444',
+        height: 50,
+    },
+    dropdownSelectedRowStyle: {
+        backgroundColor: 'rgba(0,0,0,0.1)'
+    },
+    dropdownSearchInputStyleStyle: {
+        backgroundColor: 'slategray',
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.white,
+    },
+    errorMessage: {
+        marginTop: 7,
+        color: Colors.red,
+        fontSize: 12
+    },
+    formInputElement: {
+        flexDirection: 'row',
+        borderColor: '#c6c6c6',
+        borderWidth: 1,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+        paddingVertical: 6,
+        marginTop: 10
+    },
+    inputContainer: {
+        height: 55,
+        backgroundColor: Colors.light,
+        flexDirection: 'row',
+        paddingHorizontal: 15,
+        borderWidth: 0.5
+    },
+    icon: {
+        color: Colors.darkerBlue,
+        fontSize: 22,
+        marginRight: 10
+    },
+    error: {
+        marginTop: 7,
+        color: Colors.red,
+        fontSize: 12
+    },
+    inputText: {
+        color: Colors.darkBlue,
+        flex: 1
     }
 });

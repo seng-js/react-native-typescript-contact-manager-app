@@ -1,8 +1,7 @@
 import React from 'react';
 import {buildNotificationMessage, getAvatarProfileURL, prepareToEdit} from "../../utils";
 import Colors from "../../utils/Colors";
-import SwipeableFlatList from 'react-native-swipeable-list';
-import {Image, Pressable, SafeAreaView, StyleSheet, Text, View,} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View,} from 'react-native';
 import {iconFontMedium} from "../../utils/Styles";
 import {AntDesign, Feather, MaterialCommunityIcons} from "@expo/vector-icons";
 import {useGetEnableOptions} from "../../hooks/useGetEnableOptions";
@@ -11,7 +10,8 @@ import {useNavigation} from "@react-navigation/native";
 import {deleteDataHandler} from "../../redux";
 import {useDispatch} from "react-redux";
 import {sendPushNotification} from "../../utils/Notifications";
-import {ItemProps} from "../../interface";
+import {SwipeListView} from 'react-native-swipe-list-view';
+
 
 const darkColors = {
     background: 'white',
@@ -28,41 +28,8 @@ const colorEmphasis = {
     disabled: 0.38,
 };
 
-const extractItemKey = (item:any) => {
-    return item.index;
-};
-
-const Item = ({item}:ItemProps) => {
-    return (
-        <>
-            <View style={styles.item}>
-                <Image style={styles.avatar} source={{uri: getAvatarProfileURL(item.avatar)}}/>
-                <View style={styles.messageContainer}>
-                    <Text style={styles.name} numberOfLines={1}>
-                        {item.name}
-                    </Text>
-                    <Text style={styles.subject} numberOfLines={1}>
-                        {item.company}
-                    </Text>
-                    <View style={styles.createdDate}>
-                        <MaterialCommunityIcons name="update" size={16} color={Colors.darkBlue} />
-                        <Text style={styles.text} numberOfLines={2}>
-                            {moment(item.createdDate).calendar()}
-                        </Text>
-                    </View>
-                </View>
-            </View>
-            <View />
-        </>
-    );
-};
-
-function renderItemSeparator() {
-    return <View style={styles.itemSeparator} />;
-}
-
-
 const ListSwipeableItem = ({data}: any) => {
+
     const dispatch = useDispatch();
     const navigation = useNavigation<any>();
     const {enabledDelete, enabledNotification} = useGetEnableOptions();
@@ -74,51 +41,72 @@ const ListSwipeableItem = ({data}: any) => {
         }
     }
 
-    const QuickActions = (index: any, item: any) => {
-        return (
-            <View style={styles.qaContainer}>
-                <View style={[styles.buttonContainer]}>
-                    <Pressable onPress={() => navigation.navigate({
-                        name: 'Form',
-                        params: prepareToEdit(item)
-                    })}>
-                        <MaterialCommunityIcons style={styles.buttonAction} name="account-edit-outline" size={iconFontMedium} />
-                    </Pressable>
-                </View>
-                <View style={[styles.buttonContainer]}>
-                    <Pressable onPress={() => navigation.navigate({
-                        name: 'Detail',
-                        params: prepareToEdit(item)
-                    })}>
-                        <Feather style={styles.buttonAction} name="user-check" size={iconFontMedium} color="black" />
-                    </Pressable>
-                </View>
-                {enabledDelete && (
-                    <View style={[styles.buttonContainer]}>
-                        <Pressable onPress={() => deleteHandler(item)}>
-                            <AntDesign style={styles.buttonDeleteAction} name="deleteuser" size={iconFontMedium} />
-                        </Pressable>
-                    </View>
-                )}
-            </View>
-        );
+    const onRowDidOpen = (rowKey: any) => {
+        console.log('This row opened', rowKey);
     };
 
+    const renderItem = (data:any) => (
+        <View style={styles.item}>
+            <Image style={styles.avatar} source={{uri: getAvatarProfileURL(data.item.avatar)}}/>
+            <View style={styles.messageContainer}>
+                <Text style={styles.name} numberOfLines={1}>
+                    {data.item.name}
+                </Text>
+                <Text style={styles.subject} numberOfLines={1}>
+                    {data.item.company}
+                </Text>
+                <View style={styles.createdDate}>
+                    <MaterialCommunityIcons name="update" size={16} color={Colors.darkBlue} />
+                    <Text style={styles.text} numberOfLines={2}>
+                        {moment(data.item.createdDate).calendar()}
+                    </Text>
+                </View>
+            </View>
+        </View>
+    );
+
+    const renderHiddenItem = (data:any) => (
+        <View style={styles.qaContainer}>
+            <View style={[styles.buttonContainer]}>
+                <Pressable onPress={() => navigation.navigate({
+                    name: 'Form',
+                    params: prepareToEdit(data.item)
+                })}>
+                    <MaterialCommunityIcons style={styles.buttonAction} name="account-edit-outline" size={iconFontMedium} />
+                </Pressable>
+            </View>
+            <View style={[styles.buttonContainer]}>
+                <Pressable onPress={() => navigation.navigate({
+                    name: 'Detail',
+                    params: prepareToEdit(data.item)
+                })}>
+                    <Feather style={styles.buttonAction} name="user-check" size={iconFontMedium} color="black" />
+                </Pressable>
+            </View>
+            {enabledDelete && (
+                <View style={[styles.buttonContainer]}>
+                    <Pressable onPress={() => deleteHandler(data.item)}>
+                        <AntDesign style={styles.buttonDeleteAction} name="deleteuser" size={iconFontMedium} />
+                    </Pressable>
+                </View>
+            )}
+        </View>
+    );
+
     return (
-        <SafeAreaView style={styles.container}>
-            <SwipeableFlatList
-                keyExtractor={extractItemKey}
+        <View style={styles.container}>
+            <SwipeListView
                 data={data}
-                renderItem={({item}) => (
-                    <Item item={item} />
-                )}
-                maxSwipeDistance={240}
-                renderQuickActions={({index, item}) => QuickActions(index, item)}
-                contentContainerStyle={styles.contentContainerStyle}
-                shouldBounceOnMount={true}
-                ItemSeparatorComponent={renderItemSeparator}
+                renderItem={renderItem}
+                renderHiddenItem={renderHiddenItem}
+                leftOpenValue={75}
+                rightOpenValue={-150}
+                previewRowKey={'0'}
+                previewOpenValue={-40}
+                previewOpenDelay={3000}
+                onRowDidOpen={onRowDidOpen}
             />
-        </SafeAreaView>
+        </View>
     );
 }
 
@@ -238,5 +226,40 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         flexDirection: 'row'
+    },
+    backTextWhite: {
+        color: '#FFF',
+    },
+    rowFront: {
+        alignItems: 'center',
+        backgroundColor: '#CCC',
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        justifyContent: 'center',
+        height: 50,
+    },
+    rowBack: {
+        alignItems: 'center',
+        backgroundColor: '#DDD',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+    },
+    backRightBtn: {
+        alignItems: 'center',
+        bottom: 0,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        width: 75,
+    },
+    backRightBtnLeft: {
+        backgroundColor: 'blue',
+        right: 75,
+    },
+    backRightBtnRight: {
+        backgroundColor: 'red',
+        right: 0,
     }
 });

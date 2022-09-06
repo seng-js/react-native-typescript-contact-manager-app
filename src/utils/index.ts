@@ -26,9 +26,9 @@ const deleteKeys = () => {
     ]
 }
 const prepareToEdit = (item: any) => {
-    const selectedProfile = {selectedIndexProfile: getSelectedIndexProfile(item.avatar)};
-    const selectedPosition = {selectedIndexPosition: getSelectedIndexPosition(item.position)};
-    const selectedCity = {selectedIndexCity: getSelectedIndexCity(item.city)};
+    const selectedProfile:any = {selectedIndexProfile: getSelectedIndexProfile(item.avatar)};
+    const selectedPosition:any = {selectedIndexPosition: getSelectedIndexPosition(item.position)};
+    const selectedCity:any = {selectedIndexCity: getSelectedIndexCity(item.city)};
 
     return {
             ...item,

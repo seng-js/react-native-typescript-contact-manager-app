@@ -1,3 +1,4 @@
+import * as React from "react";
 import {useEffect, useRef} from 'react';
 import {Provider} from "react-redux";
 import store from "./src/redux/store";
@@ -16,7 +17,7 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-    const notificationListener = useRef();
+    const notificationListener = useRef<any>();
 
     useEffect(() => {
         useRegisterForPushNotificationsAsync();

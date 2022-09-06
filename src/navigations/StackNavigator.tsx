@@ -1,3 +1,4 @@
+import * as React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import FormScreen from "../screens/FormScreen";
 import DrawerNavigator from "./DrawerNavigator";

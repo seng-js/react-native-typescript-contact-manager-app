@@ -1,20 +1,18 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, TextInputProps, View} from 'react-native';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 
-interface InputProps {
+interface InputProps extends TextInputProps {
     label: string,
     iconName: any,
-    error: any,
-    onFocus: () => void
+    error: any
 }
 
 const Input = ({
   label,
   iconName,
   error,
-  onFocus = () => {},
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -22,7 +20,7 @@ const Input = ({
     <View>
       <View
         style={[
-          styles.formElement,
+          styles.formInputElement,
           {
             borderColor: error
               ? Colors.red
@@ -37,14 +35,10 @@ const Input = ({
           style={styles.icon}
         />
         <TextInput
-          autoCorrect={false}
-          onFocus={() => {
-            onFocus();
-            setIsFocused(true);
-          }}
-          onBlur={() => setIsFocused(false)}
-          style={styles.inputText}
-          {...props}
+            autoCorrect={false}
+            onBlur={() => setIsFocused(false)}
+            style={styles.inputText}
+            {...props}
         />
       </View>
       {error && (
@@ -57,7 +51,7 @@ const Input = ({
 };
 
 const styles = StyleSheet.create({
-    formElement: {
+    formInputElement: {
         flexDirection: 'row',
         borderColor: '#c6c6c6',
         borderWidth: 1,

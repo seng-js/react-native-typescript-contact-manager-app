@@ -9,6 +9,7 @@ interface SelectProps {
     name: string,
     errors: any,
     data: any,
+    props: any
 }
 
 const Select = ({
@@ -30,6 +31,15 @@ const Select = ({
                 searchPlaceHolderColor={'#F8F8F8'}
                 renderSearchInputLeftIcon={() => {
                     return <Ionicons name={'search'} color={Colors.darkerBlue} size={iconFontMedium} />;
+                }}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                }}
+                buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem
+                }}
+                rowTextForSelection={(item, index) => {
+                    return item
                 }}
                 {...props}
             />
