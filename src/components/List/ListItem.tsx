@@ -3,15 +3,12 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import SocialList from "./SocialList";
 import ListAction from "./ListAction";
 import {getAvatarProfileURL} from "../../utils";
-import {ItemProps} from "../../interface";
 
-interface ListItemProps {
-    data: Array<any>
-}
+const ListItem = ({data}: any) => {
 
-const ListItem = ({data}: ListItemProps) => {
     const RenderListItem = () => {
-        const renderItem = ({item}: ItemProps) => {
+
+        const renderItem = (item: any) => {
             return(
                 <View style={styles.box}>
                     <View style={styles.profile}>
@@ -24,7 +21,7 @@ const ListItem = ({data}: ListItemProps) => {
                             <Text style={styles.position}>{item.position}</Text>
                             <Text style={styles.city}>{item.city}</Text>
                         </View>
-                        <SocialList item={item}/>
+                        <SocialList item={item.social_networks}/>
                     </View>
                     <ListAction item={item}/>
                 </View>

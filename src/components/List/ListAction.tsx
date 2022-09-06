@@ -9,9 +9,8 @@ import {grey, iconFontMedium} from "../../utils/Styles";
 import {buildNotificationMessage, prepareToEdit} from "../../utils";
 import {useGetEnableOptions} from "../../hooks/useGetEnableOptions";
 import {sendPushNotification} from "../../utils/Notifications";
-import {ItemProps} from "../../interface";
 
-const ListAction = ({item}: ItemProps) => {
+const ListAction = (item: any) => {
     const {enabledDelete} = useGetEnableOptions();
     const navigation = useNavigation<any>();
     const dispatch = useDispatch();

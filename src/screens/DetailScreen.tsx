@@ -9,6 +9,7 @@ import {grey, iconFontMedium} from "../utils/Styles";
 import {Button} from "react-native-paper";
 import {updateContactHandler} from "../redux";
 import {useDispatch} from "react-redux";
+import {ScreenProps} from "../interface";
 
 const colorEmphasis = {
     high: 0.87,
@@ -25,12 +26,7 @@ const darkColors = {
     error: '#CF6679',
 };
 
-interface DetailScreenProps {
-    route: any,
-    navigation: any,
-}
-
-const DetailScreen = ({route, navigation}: DetailScreenProps) => {
+const DetailScreen = ({route, navigation}: ScreenProps) => {
     const dispatch = useDispatch();
     const {isContact, isFavorite, index} = route?.params;
 
@@ -44,7 +40,7 @@ const DetailScreen = ({route, navigation}: DetailScreenProps) => {
                 <Image style={styles.avatar} source={{uri: getAvatarProfileURL(route?.params.avatar)}}/>
                 <Text style={styles.name}>{route?.params.name}</Text>
                 <View style={{marginTop: 10}}>
-                    <SocialList item={route?.params} />
+                    <SocialList item={route?.params?.social_networks} />
                 </View>
             </View>
             <View style={styles.container}>

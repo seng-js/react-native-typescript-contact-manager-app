@@ -1,5 +1,6 @@
 import * as Notifications from "expo-notifications";
 import {useGetPushNotificationToken} from "../hooks/useGetPushNotificationToken";
+import {MessageDataProps} from "../interface";
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -8,12 +9,6 @@ Notifications.setNotificationHandler({
         shouldSetBadge: false,
     }),
 });
-
-interface MessageDataProps {
- title: string;
- body: object;
- data: object;
-}
 
 export const sendPushNotification = async (messageData: MessageDataProps) => {
     const token = await useGetPushNotificationToken()

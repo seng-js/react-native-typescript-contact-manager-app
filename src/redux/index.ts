@@ -1,12 +1,12 @@
 import axios from "axios";
 import {createContact, deleteContact, getInitData, updateContact} from "./actions";
 import {FIREBASE_URL} from "../utils/Constants";
-import {AnyAction, Dispatch} from "@reduxjs/toolkit";
+import {Dispatch} from "@reduxjs/toolkit";
 import {convertArrayObject} from "../utils";
 
 const peopleUrl = FIREBASE_URL + 'people';
 
-export const getInitDataHandler = (dispatch: Dispatch<AnyAction>) => {
+export const getInitDataHandler = (dispatch: Dispatch) => {
     return axios.get(peopleUrl + '.json')
         .then((response) => {
             let contacts = convertArrayObject(response.data);
@@ -16,21 +16,21 @@ export const getInitDataHandler = (dispatch: Dispatch<AnyAction>) => {
         });
 }
 
-export const deleteDataHandler = (index:string, dispatch: Dispatch<AnyAction>) => {
+export const deleteDataHandler = (index:string, dispatch: Dispatch) => {
     axios.delete(peopleUrl + '/' + index + '.json').then(() => {
         dispatch(deleteContact(index))
     });
 }
 
-export const updateContactHandler = (type: string, action: string, index: string, dispatch: Dispatch<AnyAction>) => {
-    let data = {};
+export const updateContactHandler = (type: string, action: string, index: string, dispatch: Dispatch) => {
+    let data:any = {};
     const isAdd = action === 'add';
     if (type === 'favorite') {
-        data = {'isFavorite': isAdd}
+        data = {isFavorite: isAdd}
     } else if (type === 'contact') {
-        data = {'isContact': isAdd}
+        data = {isContact: isAdd}
         if (isAdd === false) {
-            data = {'isContact': false, 'isFavorite': false}
+            data = {isContact: false, isFavorite: false}
         }
     }
     axios.patch(peopleUrl + '/' + index + '.json', data).then(() => {
@@ -38,7 +38,7 @@ export const updateContactHandler = (type: string, action: string, index: string
     });
 }
 
-export const saveContactHandler = (data:any, dispatch: Dispatch<AnyAction>) => {
+export const saveContactHandler = (data:any, dispatch: Dispatch) => {
     if (data.index === undefined) {
         axios.post(peopleUrl + '/' + '.json', {...data, createdDate: (new Date()).getTime()}).then((response) => {
             if (response.data !== undefined) {

@@ -1,4 +1,4 @@
-import {Image, Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Image, Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {grey, iconFontMedium} from "../utils/Styles";
@@ -21,13 +21,9 @@ import {Button} from "react-native-paper";
 import {sendPushNotification} from "../utils/Notifications";
 import {useGetEnableOptions} from "../hooks/useGetEnableOptions";
 import SelectDropdown from 'react-native-select-dropdown';
+import {ScreenProps} from "../interface";
 
-interface FormScreenProps {
-    route:any,
-    navigation:any
-}
-
-const FormScreen = ({route, navigation}: FormScreenProps) => {
+const FormScreen = ({route, navigation}: ScreenProps) => {
     const dispatch = useDispatch();
     const [inputs, setInputs] = useState<any>(defaultContact);
     const [errors, setErrors] = useState<any>({});

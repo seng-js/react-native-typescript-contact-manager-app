@@ -6,8 +6,9 @@ import {
     CONTACT_UPDATE,
     CONTACT_UPDATE_SETTING
 } from "../utils/Constants";
+import {PeopleType} from "../interface";
 
-export const getInitData = (contacts:any) => {
+export const getInitData = (contacts:Array<PeopleType>) => {
     console.log('getInitData');
     return {
         type: CONTACT_GET_INIT_DATA,
@@ -15,14 +16,14 @@ export const getInitData = (contacts:any) => {
     };
 };
 
-export const createContact = (data:any) => {
+export const createContact = (data:PeopleType) => {
     return {
         type: CONTACT_CREATE,
         payload: {data: data}
     };
 };
 
-export const updateContact = (index:string, data:any) => {
+export const updateContact = (index:string, data:PeopleType) => {
     return {
         type: CONTACT_UPDATE,
         payload: {index: index, data: data}

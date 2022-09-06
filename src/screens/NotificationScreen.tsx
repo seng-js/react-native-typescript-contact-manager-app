@@ -6,6 +6,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import Colors from "../utils/Colors";
 import moment from "moment/moment";
 import {useGetNotifications} from "../hooks/useGetNotifications";
+import {NotificationProps} from "../interface";
 
 const NotificationScreen = () => {
     const [data, setData] = useState([]);
@@ -22,15 +23,7 @@ const NotificationScreen = () => {
         }
     }
 
-    interface NotificationProps {
-        item: {
-            image: string,
-            text: string,
-            date: string
-        }
-    }
-
-    const Item = ({ item }:NotificationProps) => (
+    const Item = ({ item }: NotificationProps) => (
         <View style={styles.container}>
             <View style={styles.imageContainer}>
                 <Image source={{uri: REACT_JS_APP_URl + '/' + item.image}} style={styles.image} />
@@ -47,7 +40,7 @@ const NotificationScreen = () => {
         </View>
     );
 
-    const renderItem = ({ item }:NotificationProps) => {
+    const renderItem = ({ item }: NotificationProps) => {
         return (
             <Item
                 item={item}

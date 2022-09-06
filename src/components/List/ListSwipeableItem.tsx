@@ -11,7 +11,7 @@ import {deleteDataHandler} from "../../redux";
 import {useDispatch} from "react-redux";
 import {sendPushNotification} from "../../utils/Notifications";
 import {SwipeListView} from 'react-native-swipe-list-view';
-
+import {ItemProps, ListItemProps} from "../../interface";
 
 const darkColors = {
     background: 'white',
@@ -28,7 +28,7 @@ const colorEmphasis = {
     disabled: 0.38,
 };
 
-const ListSwipeableItem = ({data}: any) => {
+const ListSwipeableItem = ({data}: ListItemProps) => {
 
     const dispatch = useDispatch();
     const navigation = useNavigation<any>();
@@ -41,36 +41,32 @@ const ListSwipeableItem = ({data}: any) => {
         }
     }
 
-    const onRowDidOpen = (rowKey: any) => {
-        console.log('This row opened', rowKey);
-    };
-
-    const renderItem = (data:any) => (
+    const renderItem = ({item}: ItemProps) => (
         <View style={styles.item}>
-            <Image style={styles.avatar} source={{uri: getAvatarProfileURL(data.item.avatar)}}/>
+            <Image style={styles.avatar} source={{uri: getAvatarProfileURL(item.avatar)}}/>
             <View style={styles.messageContainer}>
-                <Text style={styles.name} numberOfLines={1}>
-                    {data.item.name}
+                <Text style={styles.name}>
+                    {item.name}
                 </Text>
-                <Text style={styles.subject} numberOfLines={1}>
-                    {data.item.company}
+                <Text style={styles.subject}>
+                    {item.company}
                 </Text>
                 <View style={styles.createdDate}>
                     <MaterialCommunityIcons name="update" size={16} color={Colors.darkBlue} />
-                    <Text style={styles.text} numberOfLines={2}>
-                        {moment(data.item.createdDate).calendar()}
+                    <Text style={styles.text}>
+                        {moment(item.createdDate).calendar()}
                     </Text>
                 </View>
             </View>
         </View>
     );
 
-    const renderHiddenItem = (data:any) => (
+    const renderHiddenItem = ({item}:ItemProps) => (
         <View style={styles.qaContainer}>
             <View style={[styles.buttonContainer]}>
                 <Pressable onPress={() => navigation.navigate({
                     name: 'Form',
-                    params: prepareToEdit(data.item)
+                    params: prepareToEdit(item)
                 })}>
                     <MaterialCommunityIcons style={styles.buttonAction} name="account-edit-outline" size={iconFontMedium} />
                 </Pressable>
@@ -78,14 +74,14 @@ const ListSwipeableItem = ({data}: any) => {
             <View style={[styles.buttonContainer]}>
                 <Pressable onPress={() => navigation.navigate({
                     name: 'Detail',
-                    params: prepareToEdit(data.item)
+                    params: prepareToEdit(item)
                 })}>
                     <Feather style={styles.buttonAction} name="user-check" size={iconFontMedium} color="black" />
                 </Pressable>
             </View>
             {enabledDelete && (
                 <View style={[styles.buttonContainer]}>
-                    <Pressable onPress={() => deleteHandler(data.item)}>
+                    <Pressable onPress={() => deleteHandler(item)}>
                         <AntDesign style={styles.buttonDeleteAction} name="deleteuser" size={iconFontMedium} />
                     </Pressable>
                 </View>
@@ -104,7 +100,6 @@ const ListSwipeableItem = ({data}: any) => {
                 previewRowKey={'0'}
                 previewOpenValue={-40}
                 previewOpenDelay={3000}
-                onRowDidOpen={onRowDidOpen}
             />
         </View>
     );
@@ -133,11 +128,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 80,
         padding: 10,
-        marginTop: 5
+        marginTop: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.darkBlue
     },
     messageContainer: {
         maxWidth: 300,
-        marginLeft: 30
+        marginLeft: 30,
     },
     name: {
         fontSize: 16,
