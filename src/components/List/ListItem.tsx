@@ -8,7 +8,7 @@ const ListItem = ({data}: any) => {
 
     const RenderListItem = () => {
 
-        const renderItem = (item: any) => {
+        const renderItem = ({item}: any) => {
             return(
                 <View style={styles.box}>
                     <View style={styles.profile}>
@@ -21,7 +21,7 @@ const ListItem = ({data}: any) => {
                             <Text style={styles.position}>{item.position}</Text>
                             <Text style={styles.city}>{item.city}</Text>
                         </View>
-                        <SocialList item={item.social_networks}/>
+                        <SocialList item={item}/>
                     </View>
                     <ListAction item={item}/>
                 </View>

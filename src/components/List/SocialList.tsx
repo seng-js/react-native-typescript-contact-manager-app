@@ -3,11 +3,7 @@ import * as React from "react";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
 
-interface SocialListProps {
-    item: any
-}
-
-const SocialList = ({item}: SocialListProps) => {
+const SocialList = ({item}: any) => {
     const {facebook, instagram, twitter, youtube} = item.social_networks;
     return (
         <View style={styles.iconContainer}>
