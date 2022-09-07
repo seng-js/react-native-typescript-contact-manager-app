@@ -3,13 +3,13 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import SocialList from "./SocialList";
 import ListAction from "./ListAction";
 import {getAvatarProfileURL} from "../../utils";
-import {ListItemProps} from "../../interface";
+import {ItemProps, ListItemProps} from "../../interface";
 
-const ListItem = ({data}: ListItemProps) => {
+const ListItem: React.FC<ListItemProps> = ({data}) => {
 
     const RenderListItem = () => {
 
-        const renderItem = ({item}: any) => {
+        const renderItem = ({item}: ItemProps) => {
             return(
                 <View style={styles.box}>
                     <View style={styles.profile}>

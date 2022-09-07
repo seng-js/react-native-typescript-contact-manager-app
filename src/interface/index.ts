@@ -1,10 +1,9 @@
 export interface ItemProps {
-    index: string
     item: PeopleType
 }
 
 export interface ListItemProps {
-    data: Array<ItemProps>
+    data: Array<PeopleType>
 }
 
 export interface NotificationProps {

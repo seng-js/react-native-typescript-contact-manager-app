@@ -9,8 +9,9 @@ import {grey, iconFontMedium} from "../../utils/Styles";
 import {buildNotificationMessage, prepareToEdit} from "../../utils";
 import {useGetEnableOptions} from "../../hooks/useGetEnableOptions";
 import {sendPushNotification} from "../../utils/Notifications";
+import {ItemProps, PeopleType} from "../../interface";
 
-const ListAction = ({item}: any) => {
+const ListAction: React.FC<ItemProps> = ({item}) => {
     const {enabledDelete} = useGetEnableOptions();
     const navigation = useNavigation<any>();
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const ListAction = ({item}: any) => {
         updateContactHandler(type, action, index, dispatch);
     }
 
-    const deleteHandler = (item:any) => {
+    const deleteHandler = (item:PeopleType) => {
         deleteDataHandler(item.index, dispatch);
 
         if (enabledNotification) {

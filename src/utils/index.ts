@@ -1,6 +1,6 @@
 import {AVATAR_URL_PROFILE, listAvatar, listCity, listPosition} from "./Constants";
 
-const buildNotificationMessage = (title: any, body: any, data: { image: any; }) => {
+const buildNotificationMessage = (title: string, body: any, data: { image: string; }) => {
     return {
         title: title,
         body: body,
@@ -8,7 +8,7 @@ const buildNotificationMessage = (title: any, body: any, data: { image: any; }) 
     }
 }
 
-const buildNotificationData = (text: any, image: any, date: any) => {
+const buildNotificationData = (text: string | null, image: string | unknown, date: number) => {
     return {
         date: date !== undefined ? date : Date.now(),
         text: text,

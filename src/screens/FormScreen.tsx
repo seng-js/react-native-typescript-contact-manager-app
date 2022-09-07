@@ -77,7 +77,7 @@ const FormScreen = ({route, navigation}: ScreenProps) => {
         });
     }
 
-    const handleOnSelect = (selectedItem: { image: string; title: any; }, input: string) => {
+    const handleOnSelect = (selectedItem: { image: string; title: string; }, input: string) => {
         if (input === 'avatar') {
             setInputs({...inputs, [input]: 'img/' + selectedItem.image});
         } else {
@@ -185,7 +185,7 @@ const FormScreen = ({route, navigation}: ScreenProps) => {
                         }}
                         data={listPosition}
                         defaultValue={() => {}}
-                        onSelect={(selectedItem: { image: string; title: any; }) => handleOnSelect(selectedItem, 'position')}
+                        onSelect={(selectedItem: { image: string; title: string; }) => handleOnSelect(selectedItem, 'position')}
                         renderCustomizedButtonChild={(selectedItem: any) => {
                             return (
                                 <View style={styles.dropdownButtonChildStyle}>

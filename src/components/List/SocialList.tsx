@@ -2,8 +2,10 @@ import {Linking, StyleSheet, TouchableOpacity, View} from "react-native";
 import * as React from "react";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import Colors from "../../utils/Colors";
+import {ItemProps} from "../../interface";
 
-const SocialList = ({item}: any) => {
+const SocialList: React.FC<ItemProps> = ({item}) => {
+    console.log(typeof item);
     const {facebook, instagram, twitter, youtube} = item.social_networks;
     return (
         <View style={styles.iconContainer}>

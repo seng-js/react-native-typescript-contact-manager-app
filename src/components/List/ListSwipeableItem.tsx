@@ -11,7 +11,7 @@ import {deleteDataHandler} from "../../redux";
 import {useDispatch} from "react-redux";
 import {sendPushNotification} from "../../utils/Notifications";
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {ListItemProps} from "../../interface";
+import {ItemProps, ListItemProps, PeopleType} from "../../interface";
 
 const darkColors = {
     background: 'white',
@@ -28,13 +28,13 @@ const colorEmphasis = {
     disabled: 0.38,
 };
 
-const ListSwipeableItem = ({data}: ListItemProps) => {
+const ListSwipeableItem: React.FC<ListItemProps> = ({data}) => {
 
     const dispatch = useDispatch();
     const navigation = useNavigation<any>();
     const {enabledDelete, enabledNotification} = useGetEnableOptions();
 
-    const deleteHandler = (item: any) => {
+    const deleteHandler = (item: PeopleType) => {
         console.log('deleteHandler');
         console.log(item);
         deleteDataHandler(item.index, dispatch);
@@ -43,7 +43,7 @@ const ListSwipeableItem = ({data}: ListItemProps) => {
         }
     }
 
-    const renderItem = ({item}: any) => (
+    const renderItem = ({item}: ItemProps) => (
         <View style={styles.item}>
             <Image style={styles.avatar} source={{uri: getAvatarProfileURL(item.avatar)}}/>
             <View style={styles.messageContainer}>
@@ -63,7 +63,7 @@ const ListSwipeableItem = ({data}: ListItemProps) => {
         </View>
     );
 
-    const renderHiddenItem = ({item}: any) => (
+    const renderHiddenItem = ({item}: ItemProps) => (
         <View style={styles.qaContainer}>
             <View style={[styles.buttonContainer]}>
                 <Pressable onPress={() => navigation.navigate({
