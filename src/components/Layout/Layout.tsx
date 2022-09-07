@@ -4,7 +4,8 @@ import ListItem from "../List/ListItem";
 import {useSelector} from "react-redux";
 import {useGetEnableOptions} from "../../hooks/useGetEnableOptions";
 import ListSwipeableItem from "../List/ListSwipeableItem";
-import {PeopleType} from "../../interface";
+import {ListItemProps, PeopleType} from "../../interface";
+import {RootState} from "../../redux/store";
 
 interface LayoutProps {
     title: string,
@@ -13,8 +14,7 @@ interface LayoutProps {
 
 const Layout = ({title}: LayoutProps) => {
     const {enabledSwipeList} = useGetEnableOptions();
-    const state:any = useSelector(state => state);
-    const contacts = state.contacts;
+    const contacts = useSelector<RootState, Array<PeopleType>>(state => state.contacts);
     let data: Array<PeopleType>;
     switch (title) {
         case 'Contact':

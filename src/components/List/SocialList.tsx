@@ -5,7 +5,6 @@ import Colors from "../../utils/Colors";
 import {ItemProps} from "../../interface";
 
 const SocialList: React.FC<ItemProps> = ({item}) => {
-    console.log(typeof item);
     const {facebook, instagram, twitter, youtube} = item.social_networks;
     return (
         <View style={styles.iconContainer}>

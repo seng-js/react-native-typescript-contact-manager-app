@@ -35,8 +35,6 @@ const ListSwipeableItem: React.FC<ListItemProps> = ({data}) => {
     const {enabledDelete, enabledNotification} = useGetEnableOptions();
 
     const deleteHandler = (item: PeopleType) => {
-        console.log('deleteHandler');
-        console.log(item);
         deleteDataHandler(item.index, dispatch);
         if (enabledNotification) {
             sendPushNotification(buildNotificationMessage('Delete ' + item.name, '', {image: item.avatar}));

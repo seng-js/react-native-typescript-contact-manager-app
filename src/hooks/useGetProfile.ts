@@ -1,10 +1,12 @@
 import {useSelector} from "react-redux";
 import {IMAGE_URL} from "../utils/Constants";
+import {RootState} from "../redux/store";
+import {PeopleType} from "../interface";
 
 export const useGetProfile = () => {
-    const state:any = useSelector(state => state);
-    const avatar = IMAGE_URL + state?.tempContacts[0]?.avatar.replace('img/', '');
-    const name = state?.tempContacts[0]?.name;
+    const tempContacts = useSelector<RootState, Array<PeopleType>>(state => state.tempContacts);
+    const avatar = IMAGE_URL + tempContacts[0]?.avatar.replace('img/', '');
+    const name = tempContacts[0]?.name;
 
     return {avatar, name};
 }

@@ -10,7 +10,7 @@ const LeftBottomNavigator = () => {
     const dispatch = useDispatch();
     const [enabledDelete, setEnabledDelete] = useState(false);
     const [enabledNotification, setEnabledNotification] = useState(false);
-    const [enabledSwipeList, setEnabledSwipeList]  = useState(false);
+    const [enabledSwipeList, setEnabledSwipeList] = useState(false);
 
     const toggleSwitchDelete = () => {
         setEnabledDelete(previousState => !previousState);

@@ -1,7 +1,7 @@
 import {useAsyncStorage} from "@react-native-async-storage/async-storage";
 import {NOTIFICATION} from "../utils/Constants";
 
-export const useStoreNotifications = async (jsonData: { date: any; image: any; text: any }) => {
+export const useStoreNotifications = async (jsonData: { text: string | null, image: string | unknown, date: number }) => {
     const {getItem, setItem} = useAsyncStorage(NOTIFICATION);
 
     let data = [];
