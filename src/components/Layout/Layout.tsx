@@ -15,7 +15,7 @@ const Layout = ({title}: LayoutProps) => {
     const {enabledSwipeList} = useGetEnableOptions();
     const state:any = useSelector(state => state);
     const contacts = state.contacts;
-    let data: Array<ItemProps> = [];
+    let data: Array<ItemProps>;
     switch (title) {
         case 'Contact':
             data = contacts.filter((contact:PeopleType) => contact.isContact);

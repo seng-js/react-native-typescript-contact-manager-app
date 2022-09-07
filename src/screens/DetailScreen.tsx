@@ -40,7 +40,7 @@ const DetailScreen = ({route, navigation}: ScreenProps) => {
                 <Image style={styles.avatar} source={{uri: getAvatarProfileURL(route?.params.avatar)}}/>
                 <Text style={styles.name}>{route?.params.name}</Text>
                 <View style={{marginTop: 10}}>
-                    <SocialList item={route?.params?.social_networks} />
+                    <SocialList item={route?.params} />
                 </View>
             </View>
             <View style={styles.container}>

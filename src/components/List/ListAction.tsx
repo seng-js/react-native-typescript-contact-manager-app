@@ -10,7 +10,7 @@ import {buildNotificationMessage, prepareToEdit} from "../../utils";
 import {useGetEnableOptions} from "../../hooks/useGetEnableOptions";
 import {sendPushNotification} from "../../utils/Notifications";
 
-const ListAction = (item: any) => {
+const ListAction = ({item}: any) => {
     const {enabledDelete} = useGetEnableOptions();
     const navigation = useNavigation<any>();
     const dispatch = useDispatch();

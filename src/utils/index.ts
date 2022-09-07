@@ -78,9 +78,14 @@ const getSelectedIndexCity = (city: string) => {
 }
 
 const convertArrayObject = (data:any[]) => {
+    if (data === null) {
+       return [];
+    }
     let contacts: Array<any> = [];
     Object.entries(data).forEach(([index, value]) => {
-        contacts.push({...value, index});
+        if (value !== null) {
+            contacts.push({...value, index});
+        }
     });
 
     return contacts;

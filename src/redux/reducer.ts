@@ -44,7 +44,7 @@ const reducer = (state:any = initialState, action: any) => {
                 contacts: contacts
             };
         case CONTACT_DELETE:
-            contacts = state.contacts.filter((contact: { index: any; }) => contact.index !== payload.index);
+            contacts = state.contacts.filter((contact: { index: string; }) => contact.index !== payload.index);
             return {
                 ...state,
                 contacts: contacts
