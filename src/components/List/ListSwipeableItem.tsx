@@ -28,7 +28,7 @@ const colorEmphasis = {
     disabled: 0.38,
 };
 
-const ListSwipeableItem = ({data}: any) => {
+const ListSwipeableItem = ({data}: ListItemProps) => {
 
     const dispatch = useDispatch();
     const navigation = useNavigation<any>();

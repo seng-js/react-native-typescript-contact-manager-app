@@ -3,8 +3,9 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import SocialList from "./SocialList";
 import ListAction from "./ListAction";
 import {getAvatarProfileURL} from "../../utils";
+import {ListItemProps} from "../../interface";
 
-const ListItem = ({data}: any) => {
+const ListItem = ({data}: ListItemProps) => {
 
     const RenderListItem = () => {
 

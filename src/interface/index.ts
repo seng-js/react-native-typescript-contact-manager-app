@@ -1,4 +1,5 @@
 export interface ItemProps {
+    index: string
     item: PeopleType
 }
 
@@ -34,22 +35,6 @@ export interface PeopleType {
     social_networks: SocialNetworkType,
     filterByName: string,
     createdDate: string
-}
-
-export interface StateType {
-    people: PeopleType[],
-    listPeople: PeopleType[],
-    isListView: boolean,
-    search: string,
-    location: string,
-    isLoad: boolean
-}
-
-export interface SwapItemType {
-    avatar: string,
-    name: string,
-    item: object,
-    separators: object
 }
 
 export interface ScreenProps {
